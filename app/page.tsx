@@ -5,6 +5,7 @@ import { Search, Mic, ArrowUp, Star, ShoppingCart, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent } from '@/components/ui/card';
+import { BackgroundGradient } from '@/components/ui/background-gradient';
 
 // Mock product data
 const mockProducts = [
@@ -161,77 +162,74 @@ export default function Home() {
   };
 
   const ProductCard = ({ product }: { product: any }) => (
-    <Card className="group bg-slate-800/50 border-slate-700 hover:border-blue-500/50 transition-all duration-300 hover:scale-105 cursor-pointer">
-      <CardContent className="p-0">
-        <div className="relative">
-          <img 
-            src={product.image} 
-            alt={product.name}
-            className="w-full h-48 object-cover rounded-t-lg"
-          />
-          {product.discount > 0 && (
-            <div className="absolute top-2 left-2 bg-red-500 text-white px-2 py-1 rounded-full text-xs font-medium">
-              -{product.discount}%
-            </div>
-          )}
-          <button className="absolute top-2 right-2 p-2 bg-black/50 rounded-full text-white hover:bg-black/70 transition-colors">
-            <Heart size={16} />
-          </button>
-        </div>
-        <div className="p-4">
-          <h3 className="font-semibold text-white text-sm line-clamp-2 mb-2 group-hover:text-blue-400 transition-colors">
-            {product.name}
-          </h3>
-          <div className="flex items-center mb-2">
-            <div className="flex items-center">
-              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-              <span className="text-yellow-400 text-sm ml-1">{product.rating}</span>
-            </div>
-            <span className="text-gray-400 text-sm ml-2">({product.reviews})</span>
+    <BackgroundGradient className="rounded-[22px] p-1 group cursor-pointer">
+      <Card className="bg-slate-800/90 border-0 rounded-[18px] overflow-hidden h-full transition-all duration-300 group-hover:scale-[1.02]">
+        <CardContent className="p-0 h-full">
+          <div className="relative">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-48 object-cover"
+            />
+            {product.discount > 0 && (
+              <div className="absolute top-3 left-3 bg-gradient-to-r from-red-500 to-pink-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                -{product.discount}%
+              </div>
+            )}
+            <button className="absolute top-3 right-3 p-2 bg-black/60 backdrop-blur-sm rounded-full text-white hover:bg-black/80 transition-all duration-200 hover:scale-110">
+              <Heart size={16} />
+            </button>
           </div>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <span className="text-white font-bold text-lg">${product.price}</span>
-              {product.originalPrice > product.price && (
-                <span className="text-gray-400 line-through text-sm">${product.originalPrice}</span>
-              )}
+          <div className="p-5">
+            <h3 className="font-semibold text-white text-sm line-clamp-2 mb-3 group-hover:text-blue-300 transition-colors leading-relaxed">
+              {product.name}
+            </h3>
+            <div className="flex items-center mb-3">
+              <div className="flex items-center">
+                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                <span className="text-yellow-400 text-sm ml-1 font-medium">{product.rating}</span>
+              </div>
+              <span className="text-gray-400 text-sm ml-2">({product.reviews.toLocaleString()})</span>
             </div>
-            <Button size="sm" className="bg-yellow-400 hover:bg-yellow-500 text-black">
-              <ShoppingCart size={14} className="mr-1" />
-              Add
-            </Button>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="text-white font-bold text-lg">${product.price}</span>
+                {product.originalPrice > product.price && (
+                  <span className="text-gray-400 line-through text-sm">${product.originalPrice}</span>
+                )}
+              </div>
+              <Button size="sm" className="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-black font-semibold shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105">
+                <ShoppingCart size={14} className="mr-1" />
+                Add
+              </Button>
+            </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </BackgroundGradient>
   );
 
   return (
-    <div className="min-h-screen bg-slate-900">
+    <div className="min-h-screen bg-slate-900 flex flex-col">
       {/* Header */}
-      <header className="bg-slate-900 border-b border-slate-800">
+      <header className="bg-slate-900 border-b border-slate-800 flex-shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-8">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center">
-                  <span className="text-black font-bold text-lg">W</span>
+                <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center shadow-lg">
+                  <span className="text-black font-bold text-lg">S</span>
                 </div>
-                <span className="text-white font-bold text-xl">Walmart</span>
+                <span className="text-white font-bold text-xl">SmartSearch</span>
               </div>
               <nav className="hidden md:flex space-x-6">
-                <a href="#" className="text-blue-400 hover:text-blue-300 transition-colors">AI Search</a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">All Products</a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">Categories</a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">Deals</a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors">Services</a>
               </nav>
             </div>
             <div className="flex items-center space-x-4">
               <Button variant="ghost" size="sm" className="text-gray-300 hover:text-white">
                 Sign In
               </Button>
-              <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
+              <Button size="sm" className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg">
                 Sign Up
               </Button>
             </div>
@@ -239,119 +237,143 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {!showResults ? (
-          /* Hero Section */
-          <div className="text-center py-20">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Meet AI Search
-            </h1>
-            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-              Ask detailed questions for better product recommendations
-            </p>
-            
-            {/* Search Input */}
-            <div className="relative max-w-2xl mx-auto mb-12">
-              <div className="relative">
-                <Input
-                  type="text"
-                  placeholder="Ask anything about products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
-                  className="w-full h-16 px-6 pr-20 bg-slate-800/50 border-slate-700 text-white placeholder-gray-400 text-lg rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
-                  <button className="p-2 text-gray-400 hover:text-white transition-colors">
-                    <Mic size={20} />
-                  </button>
-                  <button 
-                    onClick={() => handleSearch(searchQuery)}
-                    className="p-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors"
-                  >
-                    <ArrowUp size={20} />
-                  </button>
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col">
+        {showResults ? (
+          /* Results Layout - ChatGPT Style */
+          <>
+            {/* Results Area - Scrollable */}
+            <div className="flex-1 overflow-y-auto">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                {/* Results Header */}
+                <div className="mb-8">
+                  <h2 className="text-3xl font-bold text-white mb-2 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Results for "{searchQuery}"
+                  </h2>
+                  <p className="text-gray-400 text-lg">
+                    Found {mockProducts.length} products matching your search
+                  </p>
                 </div>
-              </div>
-            </div>
 
-            {/* Suggestion Cards */}
-            <div className="space-y-4 max-w-2xl mx-auto">
-              {suggestionQueries.map((query, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleSearch(query)}
-                  className="w-full text-left p-4 bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700 rounded-xl text-gray-300 hover:text-white transition-all duration-200 hover:border-blue-500/50"
-                >
-                  <div className="flex items-center">
-                    <Search size={16} className="mr-3 text-gray-400" />
-                    {query}
+                {/* Product Grid */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mb-8">
+                  {mockProducts.slice(0, displayedProducts).map((product) => (
+                    <ProductCard key={product.id} product={product} />
+                  ))}
+                </div>
+
+                {/* Load More Button */}
+                {displayedProducts < mockProducts.length && (
+                  <div className="text-center pb-32">
+                    <Button
+                      onClick={handleLoadMore}
+                      disabled={isLoading}
+                      className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 hover:scale-105"
+                    >
+                      {isLoading ? 'Loading...' : 'Load More Products'}
+                    </Button>
                   </div>
-                </button>
-              ))}
+                )}
+              </div>
             </div>
-          </div>
-        ) : (
-          /* Search Results */
-          <div className="py-8">
-            {/* Static Search Bar */}
-            <div className="sticky top-0 bg-slate-900/95 backdrop-blur-sm py-4 mb-8 border-b border-slate-800">
-              <div className="relative max-w-2xl mx-auto">
-                <Input
-                  type="text"
-                  placeholder="Ask anything about products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
-                  className="w-full h-12 px-6 pr-20 bg-slate-800/50 border-slate-700 text-white placeholder-gray-400 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-                <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
-                  <button className="p-1 text-gray-400 hover:text-white transition-colors">
-                    <Mic size={16} />
-                  </button>
-                  <button 
-                    onClick={() => handleSearch(searchQuery)}
-                    className="p-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md transition-colors"
-                  >
-                    <ArrowUp size={16} />
-                  </button>
+
+            {/* Fixed Search Bar at Bottom */}
+            <div className="flex-shrink-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800">
+              <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+                <div className="relative">
+                  <Input
+                    type="text"
+                    placeholder="Ask anything about products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
+                    className="w-full h-14 px-6 pr-20 bg-slate-800/50 border-slate-700 text-white placeholder-gray-400 text-lg rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-lg"
+                  />
+                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                    <button className="p-2 text-gray-400 hover:text-white transition-colors">
+                      <Mic size={20} />
+                    </button>
+                    <button
+                      onClick={() => handleSearch(searchQuery)}
+                      className="p-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg transition-all duration-200 hover:scale-105 shadow-lg"
+                    >
+                      <ArrowUp size={20} />
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
-
-            {/* Results Header */}
-            <div className="mb-8">
-              <h2 className="text-2xl font-bold text-white mb-2">
-                Results for "{searchQuery}"
-              </h2>
-              <p className="text-gray-400">
-                Found {mockProducts.length} products matching your search
+          </>
+        ) : (
+          /* Landing Page - Centered */
+          <div className="flex-1 flex items-center justify-center">
+            <div className="text-center max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 bg-gradient-to-r from-white via-blue-100 to-white bg-clip-text text-transparent">
+                Meet AI Search
+              </h1>
+              <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+                Ask detailed questions for better product recommendations
               </p>
-            </div>
 
-            {/* Product Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
-              {mockProducts.slice(0, displayedProducts).map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </div>
+              {/* Border Glowing Search Input */}
+              <div className="relative max-w-2xl mx-auto mb-12">
+                {/* Glowing border effect - only shows when search is empty */}
+                {!searchQuery && (
+                  <div className="absolute inset-0 rounded-2xl p-[2px]">
+                    {/* Animated glowing border layers */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500 via-purple-500 via-pink-500 to-blue-500 opacity-75 animate-pulse"></div>
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-400 via-purple-400 via-pink-400 to-blue-400 opacity-50 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-400 via-blue-400 via-purple-400 to-cyan-400 opacity-30 animate-pulse" style={{ animationDelay: '1s' }}></div>
+                    {/* Inner background to create border effect */}
+                    <div className="absolute inset-[2px] rounded-2xl bg-slate-800/50"></div>
+                  </div>
+                )}
 
-            {/* Load More Button */}
-            {displayedProducts < mockProducts.length && (
-              <div className="text-center">
-                <Button
-                  onClick={handleLoadMore}
-                  disabled={isLoading}
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl"
-                >
-                  {isLoading ? 'Loading...' : 'Load More Products'}
-                </Button>
+                <div className="relative z-10">
+                  <Input
+                    type="text"
+                    placeholder="Ask anything about products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    onKeyPress={(e) => e.key === 'Enter' && handleSearch(searchQuery)}
+                    className={`w-full h-16 px-6 pr-20 text-white placeholder-gray-400 text-lg rounded-2xl focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-lg transition-all duration-300 ${!searchQuery
+                        ? 'bg-transparent border-transparent'
+                        : 'bg-slate-800/50 border-slate-700'
+                      }`}
+                  />
+                  <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-2">
+                    <button className="p-2 text-gray-400 hover:text-white transition-colors">
+                      <Mic size={20} />
+                    </button>
+                    <button
+                      onClick={() => handleSearch(searchQuery)}
+                      className="p-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white rounded-lg transition-all duration-200 hover:scale-105 shadow-lg"
+                    >
+                      <ArrowUp size={20} />
+                    </button>
+                  </div>
+                </div>
               </div>
-            )}
+
+              {/* Suggestion Cards */}
+              <div className="space-y-4 max-w-2xl mx-auto">
+                {suggestionQueries.map((query, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleSearch(query)}
+                    className="w-full text-left p-4 bg-slate-800/30 hover:bg-slate-800/50 border border-slate-700 rounded-xl text-gray-300 hover:text-white transition-all duration-200 hover:border-blue-500/50 hover:shadow-lg"
+                  >
+                    <div className="flex items-center">
+                      <Search size={16} className="mr-3 text-gray-400" />
+                      {query}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 }
